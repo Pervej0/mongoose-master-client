@@ -1,6 +1,17 @@
-import { FormProvider, useForm } from "react-hook-form";
+import { ReactNode } from "react";
+import {
+  FieldValues,
+  FormProvider,
+  SubmitHandler,
+  useForm,
+} from "react-hook-form";
 
-const GlobalForm = ({ onSubmit, children }) => {
+type TGlobalFormProps = {
+  onSubmit: SubmitHandler<FieldValues>;
+  children: ReactNode;
+};
+
+const GlobalForm = ({ onSubmit, children }: TGlobalFormProps) => {
   const methods = useForm();
   return (
     <FormProvider {...methods}>

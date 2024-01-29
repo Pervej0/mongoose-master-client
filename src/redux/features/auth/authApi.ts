@@ -6,7 +6,7 @@ export const authApi = baseAPi.injectEndpoints({
       query: (userInfo) => ({
         url: "/auth/login",
         method: "POST",
-        body: userInfo,
+        body: { id: userInfo.name, password: userInfo.password },
       }),
     }),
   }),

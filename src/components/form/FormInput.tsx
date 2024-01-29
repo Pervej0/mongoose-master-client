@@ -1,18 +1,30 @@
-import { useFormContext } from "react-hook-form";
+import { Input } from "antd";
+import { Controller } from "react-hook-form";
 
-const FormInput = ({
-  type,
-  id,
-  placeholder,
-}: {
+type TInput = {
   type: string;
-  id: string;
+  name: string;
+  labelText: string;
   placeholder: string;
-}) => {
-  const { register } = useFormContext();
+};
 
+const FormInput = ({ type, name, labelText, placeholder }: TInput) => {
+  // const { control } = useForm();
   return (
-    <input type={type} id={id} placeholder={placeholder} {...register(id)} />
+    <div style={{ marginBottom: "10px" }}>
+      {labelText ? (
+        <label style={{ paddingBottom: "5px", display: "inline-block" }}>
+          {labelText}
+        </label>
+      ) : null}
+      <Controller
+        // control={control}
+        name={name}
+        render={({ field }) => (
+          <Input {...field} type={type} id={name} placeholder={placeholder} />
+        )}
+      />
+    </div>
   );
 };
 
