@@ -1,4 +1,4 @@
-import AcademicSemester from "../pages/Admin/AcademicSemester";
+import AcademicSemester from "../pages/Admin/AcademicManagement/AcademicSemester";
 import FacultyDashboard from "../pages/Faculty/FacultyDashboard";
 
 export const FacultyPaths = [
