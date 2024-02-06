@@ -5,7 +5,7 @@ import {
 } from "../../../types/global.type";
 import { baseAPi } from "../../api/baseApi";
 
-const AcademicManagementApi = baseAPi.injectEndpoints({
+const AcademicSemesterApi = baseAPi.injectEndpoints({
   endpoints: (builder) => ({
     getAllAcademicSemester: builder.query({
       query: (args) => {
@@ -41,4 +41,4 @@ const AcademicManagementApi = baseAPi.injectEndpoints({
 export const {
   useGetAllAcademicSemesterQuery,
   useAddAcademicSemesterMutation,
-} = AcademicManagementApi;
+} = AcademicSemesterApi;

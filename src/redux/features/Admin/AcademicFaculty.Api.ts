@@ -1,0 +1,28 @@
+import { TAcademicFaculty } from "../../../types/AcademicFaculty.type";
+import { TResponse } from "../../../types/global.type";
+import { baseAPi } from "../../api/baseApi";
+
+const AcademicFacultyApi = baseAPi.injectEndpoints({
+  endpoints: (builder) => ({
+    AddAcademicFaculty: builder.mutation({
+      query: (data) => ({
+        url: "/academic-faculties/create-academic-faculty",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    GetAllAcademicFaculty: builder.query({
+      query: () => ({
+        url: "/academic-faculties",
+        method: "GET",
+      }),
+      transformResponse: (res: TResponse<TAcademicFaculty>) => ({
+        meta: res.meta,
+        data: res.data,
+      }),
+    }),
+  }),
+});
+
+export const { useAddAcademicFacultyMutation, useGetAllAcademicFacultyQuery } =
+  AcademicFacultyApi;

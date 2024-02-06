@@ -8,15 +8,16 @@ import {
 } from "../../../components/Constants/Global";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { academicSemesterSchema } from "../../../schemas/academicManagement.schema";
-import { useAddAcademicSemesterMutation } from "../../../redux/features/Admin/AcademicManagement.Api";
+import { useAddAcademicSemesterMutation } from "../../../redux/features/Admin/AcademicSemester.Api";
 import { toast } from "sonner";
 import { TResponse } from "../../../types/global.type";
 import { TAcademicSemesterResponse } from "../../../types/academicSemester.type";
+import { FieldValues, SubmitHandler } from "react-hook-form";
 
 const CreateAcademicSemester = () => {
   const [addAcademicSemester] = useAddAcademicSemesterMutation();
 
-  const onSubmit = async (data: any) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Processing..");
     const sessionName = semesterOptions[Number(data.name) - 1].label;
     data.code = data.name;
