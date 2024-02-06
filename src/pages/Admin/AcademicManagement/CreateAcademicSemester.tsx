@@ -23,7 +23,7 @@ const CreateAcademicSemester = () => {
     data.code = data.name;
     data.name = sessionName.toLocaleLowerCase();
     data.year = Number(data.year);
-    console.log(data, "ere");
+
     try {
       const res = (await addAcademicSemester(
         data
@@ -34,7 +34,6 @@ const CreateAcademicSemester = () => {
         toast.success("Semester created", { id: toastId });
       }
     } catch (err) {
-      console.log(err);
       toast.error("Something went wrong!");
     }
   };

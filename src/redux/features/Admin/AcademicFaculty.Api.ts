@@ -1,5 +1,5 @@
 import { TAcademicFaculty } from "../../../types/AcademicFaculty.type";
-import { TResponse } from "../../../types/global.type";
+import { TQueryParam, TResponse } from "../../../types/global.type";
 import { baseAPi } from "../../api/baseApi";
 
 const AcademicFacultyApi = baseAPi.injectEndpoints({
@@ -12,11 +12,20 @@ const AcademicFacultyApi = baseAPi.injectEndpoints({
       }),
     }),
     GetAllAcademicFaculty: builder.query({
-      query: () => ({
-        url: "/academic-faculties",
-        method: "GET",
-      }),
-      transformResponse: (res: TResponse<TAcademicFaculty>) => ({
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((item: TQueryParam) => {
+            params.append(item.name, item.value as string);
+          });
+        }
+        return {
+          url: "/academic-faculties",
+          method: "GET",
+          params,
+        };
+      },
+      transformResponse: (res: TResponse<TAcademicFaculty[]>) => ({
         meta: res.meta,
         data: res.data,
       }),

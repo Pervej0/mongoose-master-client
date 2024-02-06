@@ -108,7 +108,6 @@ const AcademicSemester = () => {
     }
   };
 
-  console.log(tableData);
   return (
     <div>
       <Table

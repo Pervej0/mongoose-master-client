@@ -45,3 +45,8 @@ export type TQueryParam = {
   name: string;
   value: boolean | React.Key;
 };
+
+export type TFilter = {
+  text: string;
+  value: string;
+};
