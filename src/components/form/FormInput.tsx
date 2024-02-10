@@ -21,7 +21,7 @@ const FormInput = ({ type, name, labelText, placeholder }: TInput) => {
         // control={control}
         name={name}
         render={({ field }) => (
-          <Form.Item style={{ width: 300 }}>
+          <Form.Item style={{ width: 300, marginBottom: 10 }}>
             <Input
               {...field}
               type={type}
