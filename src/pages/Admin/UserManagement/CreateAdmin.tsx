@@ -59,7 +59,7 @@ const CreateAdmin = () => {
       <h1 style={{ marginBottom: 20 }}>Add A New Admin</h1>
       <GlobalForm onSubmit={onSubmit} defaultValues={adminDefaultValues}>
         <Divider>Personal Information</Divider>
-        <Row gutter={8} justify="center">
+        <Row gutter={8}>
           <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
             <FormInput
               type="text"
