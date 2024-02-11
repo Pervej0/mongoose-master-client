@@ -9,8 +9,9 @@ import {
 } from "antd";
 import { useState } from "react";
 import { TQueryParam } from "../../../types/global.type";
-import { TStudentData } from "../../../types";
+import { TAdmin, TStudentData } from "../../../types";
 import { useGetAllAdminQuery } from "../../../redux/features/Admin/Admin.api";
+import { Link } from "react-router-dom";
 
 type DataType = Pick<TStudentData, "email" | "contactNo" | "fullName">;
 
@@ -26,7 +27,7 @@ const AdminData = () => {
   ]);
 
   const tableData = studentData?.data?.map(
-    ({ fullName, _id, id, email, contactNo }: TStudentData) => ({
+    ({ fullName, _id, id, email, contactNo }: TAdmin) => ({
       key: _id,
       id,
       email,
@@ -62,9 +63,11 @@ const AdminData = () => {
     {
       title: "Action",
 
-      render: () => (
+      render: (value) => (
         <Space>
-          <Button>Details</Button>
+          <Link to={`/admin/admin-data/${value.key}`}>
+            <Button>Details</Button>
+          </Link>
           <Button>Update</Button>
           <Button>Block</Button>
         </Space>

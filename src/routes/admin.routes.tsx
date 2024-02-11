@@ -11,6 +11,9 @@ import CreateStudent from "../pages/Admin/UserManagement/CreateStudent";
 import StudentData from "../pages/Admin/UserManagement/StudentsData";
 import AdminData from "../pages/Admin/UserManagement/AdminData";
 import FacultyData from "../pages/Admin/UserManagement/FacultyData";
+import StudentDetails from "../pages/Admin/UserManagement/StudentDetails";
+import AdminDetails from "../pages/Admin/UserManagement/AdminDetails";
+import FacultyDetails from "../pages/Admin/UserManagement/FacultyDetails";
 
 export const AdminPaths = [
   {
@@ -67,6 +70,10 @@ export const AdminPaths = [
         element: <AdminData />,
       },
       {
+        path: "admin-data/:adminId",
+        element: <AdminDetails />,
+      },
+      {
         name: "Create Faculty",
         path: "create-faculty",
         element: <CreateFaculty />,
@@ -76,7 +83,10 @@ export const AdminPaths = [
         path: "faculites",
         element: <FacultyData />,
       },
-
+      {
+        path: "faculty-data/:facultyId",
+        element: <FacultyDetails />,
+      },
       {
         name: "Create Student",
         path: "create-student",
@@ -86,6 +96,10 @@ export const AdminPaths = [
         name: "All Students",
         path: "students",
         element: <StudentData />,
+      },
+      {
+        path: "student-data/:studentId",
+        element: <StudentDetails />,
       },
     ],
   },

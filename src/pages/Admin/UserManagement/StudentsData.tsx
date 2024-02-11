@@ -11,6 +11,7 @@ import { useState } from "react";
 import { TQueryParam } from "../../../types/global.type";
 import { useGetAllStudentQuery } from "../../../redux/features/Admin/Student.api";
 import { TStudentData } from "../../../types";
+import { Link, NavLink } from "react-router-dom";
 
 type DataType = Pick<TStudentData, "email" | "contactNo" | "fullName">;
 
@@ -62,13 +63,17 @@ const StudentData = () => {
     {
       title: "Action",
 
-      render: () => (
-        <Space>
-          <Button>Details</Button>
-          <Button>Update</Button>
-          <Button>Block</Button>
-        </Space>
-      ),
+      render: (value) => {
+        return (
+          <Space>
+            <Link to={`/admin/student-data/${value?.key}`}>
+              <Button>Details</Button>
+            </Link>
+            <Button>Update</Button>
+            <Button>Block</Button>
+          </Space>
+        );
+      },
       width: "1%",
     },
   ];

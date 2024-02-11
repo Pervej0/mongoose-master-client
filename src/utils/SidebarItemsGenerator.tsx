@@ -11,10 +11,14 @@ export const SidebarItemsGenerator = (items: TUserPath[], role: string) => {
     }
     if (item.children) {
       const childElem = item.children.map((child) => {
-        return {
-          key: child.name,
-          label: <NavLink to={`/${role}/${child.path}`}>{child.name}</NavLink>,
-        };
+        if (child.name) {
+          return {
+            key: child.name,
+            label: (
+              <NavLink to={`/${role}/${child.path}`}>{child.name}</NavLink>
+            ),
+          };
+        }
       });
       acc.push({ key: item.name, label: item.name, children: childElem });
     }

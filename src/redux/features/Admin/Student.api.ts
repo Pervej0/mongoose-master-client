@@ -19,7 +19,6 @@ const CreateStudentApi = baseAPi.injectEndpoints({
             params.append(item.name, item.value as string);
           });
         }
-
         return {
           url: "/students",
           method: "GET",
@@ -31,8 +30,19 @@ const CreateStudentApi = baseAPi.injectEndpoints({
         data: res.data,
       }),
     }),
+    GetSingleStudent: builder.query({
+      query: (id) => {
+        return {
+          url: `/students/${id}`,
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
 
-export const { useAddStudentMutation, useGetAllStudentQuery } =
-  CreateStudentApi;
+export const {
+  useAddStudentMutation,
+  useGetAllStudentQuery,
+  useGetSingleStudentQuery,
+} = CreateStudentApi;

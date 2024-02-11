@@ -9,6 +9,7 @@ import {
   TableColumnsType,
   TableProps,
 } from "antd";
+import { Link } from "react-router-dom";
 
 type DataType = Pick<TFaculty, "email" | "contactNo" | "fullName">;
 
@@ -59,9 +60,11 @@ const FacultyData = () => {
     {
       title: "Action",
 
-      render: () => (
+      render: (value) => (
         <Space>
-          <Button>Details</Button>
+          <Link to={`/admin/faculty-data/${value?.key}`}>
+            <Button>Details</Button>
+          </Link>
           <Button>Update</Button>
           <Button>Block</Button>
         </Space>

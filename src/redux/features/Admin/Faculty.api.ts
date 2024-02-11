@@ -1,5 +1,5 @@
 import { TQueryParam, TResponse } from "../../../types";
-import { TFaculty, TStudentData } from "../../../types/UserManagement.type";
+import { TFaculty } from "../../../types/UserManagement.type";
 import { baseAPi } from "../../api/baseApi";
 
 const CreateStudentApi = baseAPi.injectEndpoints({
@@ -30,8 +30,19 @@ const CreateStudentApi = baseAPi.injectEndpoints({
         data: res.data,
       }),
     }),
+    SingleFaculty: builder.query({
+      query: (id) => {
+        return {
+          url: `/faculties/${id}`,
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
 
-export const { useAddFacultyMutation, useGetAllFacultyQuery } =
-  CreateStudentApi;
+export const {
+  useAddFacultyMutation,
+  useGetAllFacultyQuery,
+  useSingleFacultyQuery,
+} = CreateStudentApi;

@@ -1,3 +1,4 @@
+import { useSearchParams } from "react-router-dom";
 import { TQueryParam, TResponse } from "../../../types";
 import { TAdmin, TStudentData } from "../../../types/UserManagement.type";
 import { baseAPi } from "../../api/baseApi";
@@ -31,7 +32,16 @@ const CreateStudentApi = baseAPi.injectEndpoints({
         data: res.data,
       }),
     }),
+    SingleAdmin: builder.query({
+      query: (id) => {
+        return {
+          url: `/admins/${id}`,
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
 
-export const { useAddAdminMutation, useGetAllAdminQuery } = CreateStudentApi;
+export const { useAddAdminMutation, useGetAllAdminQuery, useSingleAdminQuery } =
+  CreateStudentApi;
