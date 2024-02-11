@@ -71,7 +71,7 @@ export type TAdmin = {
   id: string;
   user: string;
   designation: string;
-  name: Name;
+  name: TAdminName;
   gender: string;
   dateOfBirth: string;
   email: string;
@@ -88,7 +88,39 @@ export type TAdmin = {
   fullName: string;
 };
 
-export type TName = {
+export type TAdminName = {
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  _id: string;
+};
+
+// ========================= Faculty ==================
+
+export type TFaculty = {
+  _id: string;
+  id: string;
+  user: string;
+  designation: string;
+  name: TFacultyName;
+  gender: string;
+  dateOfBirth: string;
+  email: string;
+  contactNo: string;
+  emergencyContactNo: string;
+  bloodGroup: string;
+  presentAddress: string;
+  permanentAddress: string;
+  profileImg: string;
+  academicDepartment: any;
+  isDeleted: boolean;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  fullName: string;
+};
+
+export type TFacultyName = {
   firstName: string;
   middleName: string;
   lastName: string;

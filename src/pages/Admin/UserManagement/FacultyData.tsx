@@ -1,24 +1,22 @@
+import { useState } from "react";
+import { TFaculty, TQueryParam, TStudentData } from "../../../types";
+import { useGetAllFacultyQuery } from "../../../redux/features/Admin/Faculty.api";
 import {
   Button,
   Pagination,
-  PaginationProps,
   Space,
   Table,
   TableColumnsType,
   TableProps,
 } from "antd";
-import { useState } from "react";
-import { TQueryParam } from "../../../types/global.type";
-import { TStudentData } from "../../../types";
-import { useGetAllAdminQuery } from "../../../redux/features/Admin/Admin.api";
 
-type DataType = Pick<TStudentData, "email" | "contactNo" | "fullName">;
+type DataType = Pick<TFaculty, "email" | "contactNo" | "fullName">;
 
-const AdminData = () => {
+const FacultyData = () => {
   const [params, setParams] = useState<TQueryParam[]>([]);
   const [page, setPage] = useState(1);
 
-  const { data: studentData, isFetching } = useGetAllAdminQuery([
+  const { data: studentData, isFetching } = useGetAllFacultyQuery([
     { name: "page", value: page },
     { name: "limit", value: 3 },
     { name: "sort", value: "id" },
@@ -55,7 +53,7 @@ const AdminData = () => {
       filterSearch: true,
     },
     {
-      title: "Admin Id",
+      title: "Faculty Id",
       dataIndex: "id",
       filterSearch: true,
     },
@@ -111,4 +109,4 @@ const AdminData = () => {
   );
 };
 
-export default AdminData;
+export default FacultyData;
