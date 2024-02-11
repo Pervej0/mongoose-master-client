@@ -23,15 +23,14 @@ const FacultyData = () => {
     ...params,
   ]);
 
-  const tableData = studentData?.data?.map(
-    ({ fullName, _id, id, email, contactNo }: TStudentData) => ({
+  const tableData =
+    studentData?.data?.map(({ fullName, _id, id, email, contactNo }) => ({
       key: _id,
       id,
       email,
       contactNo,
       fullName,
-    })
-  );
+    })) || [];
 
   const columns: TableColumnsType<DataType> = [
     {

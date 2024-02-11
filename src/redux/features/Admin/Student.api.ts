@@ -26,7 +26,7 @@ const CreateStudentApi = baseAPi.injectEndpoints({
           params,
         };
       },
-      transformResponse: (res: TResponse<TAdmin[]>) => ({
+      transformResponse: (res: TResponse<TStudentData[]>) => ({
         meta: res.meta,
         data: res.data,
       }),

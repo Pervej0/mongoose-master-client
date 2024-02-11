@@ -26,7 +26,7 @@ const StudentData = () => {
   ]);
 
   const tableData = studentData?.data?.map(
-    ({ fullName, _id, id, email, contactNo }: TStudentData) => ({
+    ({ fullName, _id, id, email, contactNo }) => ({
       key: _id,
       id,
       email,
