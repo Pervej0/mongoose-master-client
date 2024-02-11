@@ -1,91 +1,75 @@
-import { Button, Table, TableColumnsType, TableProps } from "antd";
-import { useGetAllAcademicSemesterQuery } from "../../../redux/features/Admin/AcademicSemester.Api";
-import { TAcademicSemesterResponse } from "../../../types/academicSemester.type";
+import {
+  Button,
+  Pagination,
+  PaginationProps,
+  Space,
+  Table,
+  TableColumnsType,
+  TableProps,
+} from "antd";
 import { useState } from "react";
 import { TQueryParam } from "../../../types/global.type";
+import { useGetAllStudentQuery } from "../../../redux/features/Admin/Student.api";
+import { TStudentData } from "../../../types";
 
-type DataType = Pick<
-  TAcademicSemesterResponse,
-  "_id" | "name" | "year" | "startMonth" | "endMonth"
->;
+type DataType = Pick<TStudentData, "email" | "contactNo" | "fullName">;
 
 const StudentData = () => {
   const [params, setParams] = useState<TQueryParam[]>([]);
+  const [page, setPage] = useState(1);
 
-  const { data: semesterData, isFetching } =
-    useGetAllAcademicSemesterQuery(params);
+  const { data: studentData, isFetching } = useGetAllStudentQuery([
+    { name: "page", value: page },
+    { name: "limit", value: 3 },
+    { name: "sort", value: "id" },
+    ...params,
+  ]);
 
-  const tableData = semesterData?.data?.map(
-    ({ _id, name, year, startMonth, endMonth }: TAcademicSemesterResponse) => ({
+  const tableData = studentData?.data?.map(
+    ({ fullName, _id, id, email, contactNo }: TStudentData) => ({
       key: _id,
-      name,
-      year,
-      startMonth,
-      endMonth,
+      id,
+      email,
+      contactNo,
+      fullName,
     })
   );
 
   const columns: TableColumnsType<DataType> = [
     {
       title: "Name",
-      dataIndex: "name",
-      filters: [
-        {
-          text: "Autumn",
-          value: "autumn",
-        },
-        {
-          text: "Summer",
-          value: "summer",
-        },
-        {
-          text: "Fall",
-          value: "fall",
-        },
-      ],
+      dataIndex: "fullName",
       filterMode: "tree",
       filterSearch: true,
-      width: "25%",
     },
     {
-      title: "Year",
-      dataIndex: "year",
-      filters: [
-        {
-          text: "2024",
-          value: "2024",
-        },
-        {
-          text: "2025",
-          value: "2025",
-        },
-        {
-          text: "2026",
-          value: "2026",
-        },
-        {
-          text: "2027",
-          value: "2027",
-        },
-      ],
-      width: "15%",
-    },
-    {
-      title: "Start Month",
-      dataIndex: "startMonth",
+      title: "Email",
+      dataIndex: "email",
+      filterMode: "tree",
       filterSearch: true,
-      width: "25%",
     },
     {
-      title: "End Month",
-      dataIndex: "endMonth",
+      title: "Contact No",
+      dataIndex: "contactNo",
+      filterMode: "tree",
       filterSearch: true,
-      width: "25%",
+    },
+    {
+      title: "Student ID",
+      dataIndex: "id",
+      filterSearch: true,
     },
     {
       title: "Action",
-      width: "10%",
-      render: () => <Button>Update</Button>,
+
+      render: () => (
+        <Space>
+          <Button>Details</Button>
+          <Button>Update</Button>
+          <Button>Block</Button>
+        </Space>
+      ),
+      width: "1%",
     },
   ];
 
@@ -109,14 +93,21 @@ const StudentData = () => {
   };
 
   return (
-    <div>
+    <>
       <Table
         loading={isFetching}
         columns={columns}
         dataSource={tableData}
         onChange={onChange}
+        pagination={false}
       />
-    </div>
+      <Pagination
+        current={page}
+        onChange={(value) => setPage(value)}
+        total={studentData?.meta?.total}
+        pageSize={2}
+      />
+    </>
   );
 };
 

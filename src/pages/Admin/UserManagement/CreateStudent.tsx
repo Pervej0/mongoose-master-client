@@ -6,8 +6,13 @@ import FormSelect from "../../../components/form/FormSelect";
 import { useGetAllAcademicSemesterQuery } from "../../../redux/features/Admin/AcademicSemester.Api";
 import { useGetAllAcademicDepartmentQuery } from "../../../redux/features/Admin/AcademicDepartment.Api";
 import { useAddStudentMutation } from "../../../redux/features/Admin/Student.api";
-import { bloodGroupOptions } from "../../../components/Constants/Global";
+import {
+  GenderOptions,
+  bloodGroupOptions,
+} from "../../../components/Constants/Global";
 import FormDatePicker from "../../../components/form/FormDatePicker";
+import { toast } from "sonner";
+import { TResponse, TStudentData } from "../../../types";
 
 const studentDefaultValues = {
   name: {
@@ -42,12 +47,6 @@ const studentDefaultValues = {
   academicDepartment: "65c2453a8cdf370b53cd6d65",
 };
 
-const GenderOptions = [
-  { value: "male", label: "Male" },
-  { value: "female", label: "Female" },
-  { value: "others", label: "Others" },
-];
-
 const CreateStudent = () => {
   const { data: sData, isLoading: sIsLoading } =
     useGetAllAcademicSemesterQuery(undefined);
@@ -66,6 +65,7 @@ const CreateStudent = () => {
   }));
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const toastId = toast.loading("Student creating...");
     const studentData = new FormData();
     const mainData = {
       password: "12345",
@@ -74,7 +74,16 @@ const CreateStudent = () => {
     studentData.append("data", JSON.stringify(mainData));
     studentData.append("file", data.studentProfile);
     console.log(data, "eee");
-    const res = await AddStudent(studentData);
+    try {
+      const res = (await AddStudent(studentData)) as TResponse<TStudentData>;
+      if (res?.error) {
+        toast.error(res?.error.data.message, { id: toastId });
+      } else {
+        toast.success("Student created Successfully!", { id: toastId });
+      }
+    } catch (err) {
+      toast.error("Something went wrong!");
+    }
   };
 
   return (
@@ -104,7 +113,7 @@ const CreateStudent = () => {
             <FormSelect options={GenderOptions} name="gender" label="Gender" />
           </Col>
           <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-            <FormDatePicker name="dob" label="Date of birth" />
+            <FormDatePicker name="dateOfBirth" label="Date of birth" />
           </Col>
           <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
             <FormSelect
@@ -161,7 +170,7 @@ const CreateStudent = () => {
         <Divider>Guardian</Divider>
         <Row>
           <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-            <FormInput type="text" name="" labelText="Father Name" />
+            <FormInput type="text" name="guardian." labelText="Father Name" />
           </Col>
           <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
             <FormInput

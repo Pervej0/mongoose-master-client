@@ -4,14 +4,14 @@ import { baseAPi } from "../../api/baseApi";
 
 const CreateStudentApi = baseAPi.injectEndpoints({
   endpoints: (builder) => ({
-    AddStudent: builder.mutation({
+    AddAdmin: builder.mutation({
       query: (data) => ({
-        url: "/users/create-student",
+        url: "/users/create-admin",
         method: "POST",
         body: data,
       }),
     }),
-    GetAllStudent: builder.query({
+    GetAllAdminQuery: builder.query({
       query: (args) => {
         const params = new URLSearchParams();
         if (args.length > 0) {
@@ -21,7 +21,7 @@ const CreateStudentApi = baseAPi.injectEndpoints({
         }
 
         return {
-          url: "/students",
+          url: "/admins",
           method: "GET",
           params,
         };
@@ -34,5 +34,5 @@ const CreateStudentApi = baseAPi.injectEndpoints({
   }),
 });
 
-export const { useAddStudentMutation, useGetAllStudentQuery } =
+export const { useAddAdminMutation, useGetAllAdminQueryQuery } =
   CreateStudentApi;

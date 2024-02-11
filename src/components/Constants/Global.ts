@@ -19,6 +19,11 @@ export const startDateOptions = [
   { value: "December", label: "December" },
 ];
 
+export const GenderOptions = [
+  { value: "male", label: "Male" },
+  { value: "female", label: "Female" },
+  { value: "others", label: "Others" },
+];
 export const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 export const bloodGroupOptions = bloodGroups.map((item) => ({
   value: item,
