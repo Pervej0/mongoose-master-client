@@ -8,6 +8,7 @@ export type TUser = {
 };
 
 export type TAcademicSemester = {
+  _id: string;
   name: string;
   code: string;
   year: number;

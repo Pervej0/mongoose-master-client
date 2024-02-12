@@ -8,8 +8,6 @@ const FacultyDetails = () => {
   if (isLoading) {
     return <h4>Loading....</h4>;
   }
-
-  console.log(data);
   const { designation, fullName, profileImg, academicDepartment } = data.data;
   return (
     <div>
