@@ -14,8 +14,8 @@ const CreateStudentApi = baseAPi.injectEndpoints({
     GetAllFaculty: builder.query({
       query: (args) => {
         const params = new URLSearchParams();
-        if (args.length > 0) {
-          args.forEach((item: TQueryParam) => {
+        if (args?.length > 0) {
+          args?.forEach((item: TQueryParam) => {
             params.append(item.name, item.value as string);
           });
         }

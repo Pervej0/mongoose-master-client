@@ -1,41 +1,55 @@
 import { Form, Select } from "antd";
-import { Controller } from "react-hook-form";
+import { useEffect } from "react";
+import { Controller, useFormContext, useWatch } from "react-hook-form";
 
-type TFormSelectProps = {
-  name: string;
+type TPHSelectProps = {
   label: string;
+  name: string;
   options: { value: string; label: string; disabled?: boolean }[] | undefined;
   disabled?: boolean;
   mode?: "multiple" | undefined;
+  onValueChange: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const FormSelect = ({
-  name,
+const FormSelectWithWatch = ({
   label,
+  name,
   options,
   disabled,
   mode,
-}: TFormSelectProps) => {
+  onValueChange,
+}: TPHSelectProps) => {
+  const method = useFormContext();
+
+  const inputValue = useWatch({
+    control: method.control,
+    name,
+  });
+
+  console.log(inputValue, "erre");
+
+  useEffect(() => {
+    onValueChange(inputValue);
+  }, [inputValue]);
+
   return (
     <Controller
       name={name}
       render={({ field, fieldState: { error } }) => (
-        <Form.Item label={label} style={{ marginBottom: "10px" }}>
+        <Form.Item label={label}>
           <Select
             mode={mode}
+            style={{ width: "100%" }}
             {...field}
-            style={{ width: "100%", paddingBottom: "0" }}
             options={options}
-            placeholder="Please select"
             size="large"
             disabled={disabled}
           />
           {error && <small style={{ color: "red" }}>{error.message}</small>}
         </Form.Item>
       )}
-      defaultValue=""
     />
   );
 };
 
-export default FormSelect;
+export default FormSelectWithWatch;
