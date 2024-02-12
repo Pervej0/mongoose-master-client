@@ -9,6 +9,7 @@ import { AdminPaths } from "./admin.routes";
 import { FacultyPaths } from "./Faculty.routes";
 import { StudentPaths } from "./student.routes";
 import StudentDashboard from "../pages/Student/StudentDashboard";
+import ProtectedRoute from "../components/layout/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,11 @@ const router = createBrowserRouter([
       ...routeGenerator(AdminPaths),
       {
         index: true,
-        element: <AdminDashboard />,
+        element: (
+          <ProtectedRoute role="admin">
+            <AdminDashboard />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
@@ -33,7 +38,11 @@ const router = createBrowserRouter([
       ...routeGenerator(FacultyPaths),
       {
         index: true,
-        element: <FacultyDashboard />,
+        element: (
+          <ProtectedRoute role="faculty">
+            <FacultyDashboard />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
@@ -44,7 +53,11 @@ const router = createBrowserRouter([
       ...routeGenerator(StudentPaths),
       {
         index: true,
-        element: <StudentDashboard />,
+        element: (
+          <ProtectedRoute role="student">
+            <StudentDashboard />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

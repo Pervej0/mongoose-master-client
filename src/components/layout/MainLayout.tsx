@@ -17,7 +17,7 @@ const MainLayout = () => {
           <Header
             style={{ padding: 0, textAlign: "right", paddingRight: "30px" }}
           >
-            <Button onClick={() => dispatch(logout())}>Log out</Button>
+            <Button onClick={() => dispatch(logout())}>Log out dfdff</Button>
           </Header>
           <Content style={{ margin: "24px 16px 0" }}>
             <div

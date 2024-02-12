@@ -5,7 +5,9 @@ import { AdminPaths } from "../../routes/admin.routes";
 import { FacultyPaths } from "../../routes/Faculty.routes";
 import { StudentPaths } from "../../routes/student.routes";
 import { useAppSelector } from "../../redux/hooks";
-import { currentUser } from "../../redux/features/auth/authSlice";
+import { currentToken } from "../../redux/features/auth/authSlice";
+import { verifyToken } from "../../utils/verifyToken";
+import { TUser } from "../../types";
 
 const USER_ROLE = {
   ADMIN: "admin",
@@ -14,9 +16,14 @@ const USER_ROLE = {
 };
 
 const Sidebar = () => {
-  const user = useAppSelector(currentUser);
+  const token = useAppSelector(currentToken);
 
-  let sidebarItems;
+  let user;
+
+  if (token) {
+    user = verifyToken(token) as TUser;
+  }
+  let sidebarItems: any;
 
   switch (user?.role) {
     case USER_ROLE.ADMIN:
